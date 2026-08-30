@@ -15,10 +15,16 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script
-      defer
-      src="%VITE_ANALYTICS_ENDPOINT%/umami"
-      data-website-id="%VITE_ANALYTICS_WEBSITE_ID%"></script>
+    <!-- Analytics script (optional) -->
+    <script>
+      if ("%VITE_ANALYTICS_ENDPOINT%" && !"%VITE_ANALYTICS_ENDPOINT%".startsWith("%")) {
+        const s = document.createElement("script");
+        s.defer = true;
+        s.src = "%VITE_ANALYTICS_ENDPOINT%/umami";
+        s.setAttribute("data-website-id", "%VITE_ANALYTICS_WEBSITE_ID%");
+        document.body.appendChild(s);
+      }
+    </script>
   </body>
 
 </html>
